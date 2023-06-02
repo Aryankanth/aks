@@ -443,7 +443,7 @@ resource "azurerm_kubernetes_cluster" "main" {
       error_message = "KMS etcd encryption doesn't work with system-assigned managed identity."
     }
     precondition {
-      condition     = !var.public_network_access_enabled || try(contains(var.api_server_authorized_ip_ranges, "0.0.0.0/32"), false)
+      condition     = !var.public_network_access_enabled || try(contains(var.api_server_authorized_ip_ranges, "0.0.0.0/32"), true)
       error_message = "When `public_network_access_enabled` is set to true, `0.0.0.0/32` must be added to `authorized_ip_ranges` in the `api_server_access_profile block` (https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#public_network_access_enabled)."
     }
   }
